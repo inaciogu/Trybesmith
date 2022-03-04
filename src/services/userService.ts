@@ -1,7 +1,7 @@
 import dotEnv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import userModel from '../models/userModel';
-import { UserProps } from '../@types/user';
+import { UserProps, Login } from '../@types/user';
 
 dotEnv.config();
 
@@ -17,6 +17,13 @@ const create = async (user: UserProps): Promise<Token> => {
   return { token };
 };
 
+const login = async ({ username, password }: Login): Promise<Token> => {
+  await userModel.login({ username, password });
+  const token = jwt.sign({ data: username }, secret);
+  return { token };
+};
+
 export default {
   create,
+  login,
 };

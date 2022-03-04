@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { UserProps } from '../@types/user';
+import { Login, UserProps } from '../@types/user';
 
 import userService from '../services/userService';
 
@@ -9,6 +9,13 @@ const create = async (req: Request, res: Response) => {
   res.status(201).json(token);
 };
 
+const login = async (req: Request, res: Response) => {
+  const { username, password }: Login = req.body;
+  const token = await userService.login({ username, password });
+  res.status(200).json(token);
+};
+
 export default {
   create,
+  login,
 };
