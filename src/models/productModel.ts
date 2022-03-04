@@ -10,6 +10,13 @@ const create = async ({ name, amount }: ProductProps): Promise<ProductProps> => 
   return { insertId, name, amount };
 };
 
+const getAll = async () => {
+  const query = 'SELECT * FROM Trybesmith.Products';
+  const [rows] = await connection.execute(query);
+  return rows;
+};
+
 export default {
   create,
+  getAll,
 };

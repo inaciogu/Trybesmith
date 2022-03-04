@@ -3,7 +3,7 @@ import { verify } from 'jsonwebtoken';
 
 const secret = 'segredo';
 
-const authProduct = async (req: Request, res: Response, next: NextFunction) => {
+export default async (req: Request, res: Response, next: NextFunction) => {
   const token: string | undefined = req.headers.authorization;
 
   if (!token) {
@@ -18,5 +18,3 @@ const authProduct = async (req: Request, res: Response, next: NextFunction) => {
 
   next();
 };
-
-export default authProduct;

@@ -2,7 +2,7 @@ import express from 'express';
 import userController from './controllers/userController';
 import userValidation from './middlewares/userValidation';
 import loginValidation from './middlewares/loginValidation';
-import authProduct from './auth/JwtAuth';
+import JwtAuth from './auth/JwtAuth';
 import productController from './controllers/productController';
 import productValidation from './middlewares/productValidation';
 
@@ -30,10 +30,12 @@ app.post(
 
 app.post(
   '/products', 
-  authProduct, 
+  JwtAuth, 
   productValidation.productName, 
   productValidation.productAmount,
   productController.create,
 );
+
+app.get('/products', JwtAuth, productController.getAll);
 
 export default app;

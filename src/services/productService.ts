@@ -6,6 +6,12 @@ const create = async ({ name, amount }: ProductProps) => {
   return { item: { id: insertId, name, amount } };
 };
 
+const getAll = async () => {
+  const products = await productModel.getAll();
+  return products;
+};
+
 export default {
   create,
+  getAll,
 };
