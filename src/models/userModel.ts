@@ -20,7 +20,17 @@ const login = async ({ username, password }: Login): Promise<Login> => {
   return user;
 };
 
+const findById = async (id: number) => {
+  const query = `SELECT * FROM Trybesmith.Users
+  Where id = ?`;
+  const [rows] = await connection.execute(query, [id]);
+  const [foundUser] = rows as UserProps[];
+  console.log(foundUser);
+  return foundUser;
+};
+
 export default {
   create,
   login,
+  findById,
 };
